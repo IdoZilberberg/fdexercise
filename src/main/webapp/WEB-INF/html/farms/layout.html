@@ -1,0 +1,34 @@
+<div class="alert alert-error" ng-show="error">
+  {{errorMessage}}
+</div>
+<form class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label" for="zipcode">Farm Zip Code</label>
+
+    <div class="controls">
+      <input type="text" id="zipcode" ng-model="farm.zipcode" placeholder="Zip Code" required min="5">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="seedingDate">Seeding Date</label>
+
+    <div class="controls">
+      <input class="span3" type="text" id="seedingDate" ng-model="farm.seedingDate" placeholder="Seeding Date" required
+             min="10">
+      <span class="add-on">YYYY/MM/DD</span>
+    </div>
+  </div>
+  <div class="control-group">
+    <hr/>
+    <div class="controls">
+      <button type="button" class="btn btn-primary" ng-disabled="!farm.zipcode || !farm.seedingDate" ng-hide="editMode"
+              ng-click="submitFarm(farm)">Go
+      </button>
+      <button type="button" class="btn" ng-click="resetFarmForm()">Reset</button>
+    </div>
+  </div>
+</form>
+<hr/>
+
+
