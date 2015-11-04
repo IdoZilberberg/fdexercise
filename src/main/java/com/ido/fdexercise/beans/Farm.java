@@ -6,23 +6,23 @@ import java.time.LocalDate;
  * User: ido
  */
 public class Farm {
-  private Integer zipCode;
+  private Integer zipcode;
   private LocalDate seedingDate;
 
   public Farm() {
   }
 
-  public Farm(final Integer zipCode, final LocalDate seedingDate) {
-    this.zipCode = zipCode;
+  public Farm(final Integer zipcode, final LocalDate seedingDate) {
+    this.zipcode = zipcode;
     this.seedingDate = seedingDate;
   }
 
-  public Integer getZipCode() {
-    return zipCode;
+  public Integer getZipcode() {
+    return zipcode;
   }
 
-  public void setZipCode(final Integer zipCode) {
-    this.zipCode = zipCode;
+  public void setZipcode(final Integer zipcode) {
+    this.zipcode = zipcode;
   }
 
   public LocalDate getSeedingDate() {
