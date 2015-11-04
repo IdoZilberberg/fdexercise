@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="farmStatsDao" class="com.ido.fdexercise.dao.FarmStatsDAOImplMem"/>
+    <context:annotation-config />
+
+    <bean id="externalFarmDataSource" class="com.ido.fdexercise.external.ExternalFarmDataSource"/>
+
+    <bean id="dateFormatter" class="java.time.format.DateTimeFormatter" factory-method="ofPattern">
+        <constructor-arg type="java.lang.String" value="yyyy-MM-dd"/>
+    </bean>
+
+    <bean id="farmStatsAggregator" class="com.ido.fdexercise.logic.FarmStatsAggregator"/>
+
+    <bean id="farmStatsDao" class="com.ido.fdexercise.dao.FarmStatsDAOImplMem">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="farmService" class="com.ido.fdexercise.service.FarmServiceImpl">
+        <property name="dao" ref="farmStatsDao"/>
+        <property name="farmStatsAggregator" ref="farmStatsAggregator"/>
+    </bean>
+
+    <jdbc:embedded-database id="dataSource" type="H2">
+        <jdbc:script location="classpath:db/sql/create-db.sql" />
+        <jdbc:script location="classpath:db/sql/insert-data.sql" />
+    </jdbc:embedded-database>
 
 </beans>

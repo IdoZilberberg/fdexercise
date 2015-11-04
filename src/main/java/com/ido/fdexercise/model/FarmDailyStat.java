@@ -7,7 +7,7 @@ import java.time.LocalDate;
  *
  * Record to reflect a single line in the DB
  */
-public class FarmDailyStat {
+public class FarmDailyStat implements Comparable<FarmDailyStat>{
 
   private Integer zipcode;
   private LocalDate date;
@@ -22,6 +22,16 @@ public class FarmDailyStat {
     this.precipIn = precipIn;
     this.tempMin = tempMin;
     this.tempMax = tempMax;
+  }
+
+  public int compareTo(FarmDailyStat o) {
+    Integer zipCompare = this.zipcode.compareTo(o.getZipcode());
+    if(zipCompare != 0 ) {
+      return zipCompare;
+    }
+
+    Integer dateCompare = this.date.compareTo(o.getDate());
+    return dateCompare;
   }
 
   public Integer getZipcode() {
