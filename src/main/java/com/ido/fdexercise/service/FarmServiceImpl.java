@@ -8,7 +8,7 @@ import java.time.LocalDate;
 /**
  * User: ido
  */
-@Service("trainService")
+@Service("farmService")
 public class FarmServiceImpl implements FarmService {
 
   @Override

@@ -6,21 +6,25 @@
  */
 var FarmController = function ($scope, $http) {
   $scope.farm = {};
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1
+  };
 
-  $scope.submitForm = function (farm) {
+  $scope.submit = function (farm) {
     $scope.resetError();
 
-    $http.get('/stats', {params: {zipcode:$scope.farm.zipcode, seedingDate:$scope.farm.seedingDate}})
+    $http.get('farms/stats', {params: {zipcode:$scope.farm.zipcode, seedingDate:$scope.farm.seedingDate}})
       .success(function(response) {
-        $scope.temp_min = response.temp_min
-        $scope.temp_max = response.temp_max
-        $scope.precip_in = response.precip_in
+        $scope.farm.temp_min = response.tempMin;
+        $scope.farm.temp_max = response.tempMax;
+        $scope.farm.precip_in = response.precip
       }).error(function() {
       $scope.setError('Could not get farm stats');
     })
   };
 
-  $scope.resetFarmForm = function () {
+  $scope.resetForm = function () {
     $scope.resetError();
     $scope.farm = {};
   };

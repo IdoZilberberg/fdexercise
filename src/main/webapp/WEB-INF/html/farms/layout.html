@@ -1,32 +1,39 @@
-<div class="alert alert-error" ng-show="error">
+<div class="alert alert-error" ng-show="error" xmlns="http://www.w3.org/1999/html">
   {{errorMessage}}
 </div>
 <form class="form-horizontal">
   <div class="control-group">
     <label class="control-label" for="zipcode">Farm Zip Code</label>
-
-    <div class="controls">
-      <input type="text" id="zipcode" ng-model="farm.zipcode" placeholder="Zip Code" required min="5">
-    </div>
+    <label class="control-label" for="seedingDate">Seeding Date</label>
   </div>
 
-  <div class="control-group">
-    <label class="control-label" for="seedingDate">Seeding Date</label>
-
-    <div class="controls">
-      <input class="span3" type="text" id="seedingDate" ng-model="farm.seedingDate" placeholder="Seeding Date" required
-             min="10">
-      <span class="add-on">YYYY/MM/DD</span>
+  <div class="controls">
+    <input type="text" id="zipcode" ng-model="farm.zipcode" placeholder="Zip Code" required min="5">
+    <div class="row">
+      <div class="col-md-6">
+        <p class="input-group">
+          <input type="date" id="seedingDate" class="form-control" uib-datepicker-popup ng-model="farm.seedingDate" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+        </p>
+      </div>
     </div>
+
   </div>
   <div class="control-group">
     <hr/>
     <div class="controls">
       <button type="button" class="btn btn-primary" ng-disabled="!farm.zipcode || !farm.seedingDate" ng-hide="editMode"
-              ng-click="submitFarm(farm)">Go
+              ng-click="submit(farm)">Go
       </button>
-      <button type="button" class="btn" ng-click="resetFarmForm()">Reset</button>
+      <button type="button" class="btn" ng-click="resetForm()">Reset</button>
     </div>
+  </div>
+  <div class="control-label">
+    <input type="text" id="precipIn" ng-readonly ng-model="farm.precip_in" placeholder="Precipitation" />
+    <input type="text" id="tempMin" ng-readonly ng-model="farm.temp_min" placeholder="Minimum Temperate"/>
+    <input type="text" id="tempMax" ng-readonly ng-model="farm.temp_max" placeholder="Minimum Temperate"/>
   </div>
 </form>
 <hr/>

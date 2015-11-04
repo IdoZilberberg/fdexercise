@@ -1,6 +1,7 @@
 package com.ido.fdexercise.controller;
 
 import com.ido.fdexercise.beans.Farm;
+import com.ido.fdexercise.dto.FarmStatsDTO;
 import com.ido.fdexercise.service.FarmService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,29 +19,22 @@ import java.util.List;
 @RequestMapping("/farms")
 public class FarmController {
 
-  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 
   @Resource
   private FarmService farmService;
 
-//  @RequestMapping("trainslist.json")
-//  public
-//  @ResponseBody
-//  List<Farm> getFarmList() {
-//    return farmService.getAllFarms();
-//  }
-
-  @RequestMapping(value = "/stats", method = RequestMethod.POST)
-  public
-  @ResponseBody
-  void getFarmStats(@RequestParam("zipcode") final Integer zipcode, @RequestParam("seedingDate") final String seedingDateStr) {
+  @RequestMapping(value = "/stats", method = RequestMethod.GET)
+  public @ResponseBody FarmStatsDTO getFarmStats(@RequestParam("zipcode") final Integer zipcode, @RequestParam("seedingDate") final String seedingDateStr) {
     final LocalDate seedingDate = LocalDate.parse(seedingDateStr, formatter);
-    farmService.getFarmStats(zipcode, seedingDate);
+    final FarmStatsDTO response = farmService.getFarmStats(zipcode, seedingDate);
+
+    return response;
   }
 
   @RequestMapping("/layout")
-  public String getTrainPartialPage(ModelMap modelMap) {
-    return "trains/layout";
+  public String getFarmPartialPage(ModelMap modelMap) {
+    return "farms/layout";
   }
 }
