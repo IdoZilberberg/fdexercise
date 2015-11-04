@@ -8,8 +8,10 @@ import com.ido.fdexercise.model.FarmDailyStat;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.IntFunction;
@@ -69,7 +71,7 @@ public class FarmServiceImpl implements FarmService {
 
   private List<FarmDailyStat> getMissingDataBetweenDates(final Integer zipcode, final LocalDate startDate, final LocalDate endDate, final List<FarmDailyStat> farmDailyStats) {
 
-    final int totalDaysInRange = Period.between(startDate, endDate).getDays() + 1;
+    final int totalDaysInRange = (int)(ChronoUnit.DAYS.between(startDate, endDate) + 1);
     final Set<LocalDate> datesWithAvailableData = farmDailyStats
         .stream()
         .map(FarmDailyStat::getDate).collect(Collectors.toCollection(TreeSet::new));

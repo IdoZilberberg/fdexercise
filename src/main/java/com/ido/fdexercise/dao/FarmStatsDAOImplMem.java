@@ -38,7 +38,7 @@ public class FarmStatsDAOImplMem implements FarmStatsDAO {
   }
 
   public void insertFarmDailyStat(final FarmDailyStat farmDailyStat) {
-    jdbcTemplate.update("insert into stats values(?, PARSEDATETIME(?, 'yyyy-MM-dd', ?, ?, ?))",
+    jdbcTemplate.update("insert into stats values(?, PARSEDATETIME(?, 'yyyy-MM-dd'), ?, ?, ?)",
         farmDailyStat.getZipcode(), dateFormatter.format(farmDailyStat.getDate()),
         farmDailyStat.getPrecipIn(), farmDailyStat.getTempMin(), farmDailyStat.getTempMax());
     log.debug("Inserted line to DB. ZipCode={}, SeedingDate={}", farmDailyStat.getZipcode(), dateFormatter.format(farmDailyStat.getDate()));

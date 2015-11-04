@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<locations>
+    <location request_lat="37.4067" request_lon="-83.9364" request_city="Gray Hawk" request_state="KY" timezone="EST" climate_city="LONDON KY" climate_station_id="KLOZ">
+        <day day_of_week="Tuesday" date="2015-11-03">
+            <temp_max>76</temp_max>
+            <normal_max>64</normal_max>
+            <temp_min>49</temp_min>
+            <normal_min>40</normal_min>
+            <record_max_max>80</record_max_max>
+            <record_max_max_year>1974</record_max_max_year>
+            <record_min_min>17</record_min_min>
+            <record_min_min_year>1963</record_min_min_year>
+            <avg_precip_day>0.12</avg_precip_day>
+            <precip_in>1.23</precip_in>
+            <precip_mtd>0.22</precip_mtd>
+            <precip_ytd>46.16</precip_ytd>
+            <snow_day></snow_day>
+            <snow_mtd></snow_mtd>
+            <snow_depth></snow_depth>
+            <sunrise_time_local>7:02 am</sunrise_time_local>
+            <sunrise_time_utc>12:02</sunrise_time_utc>
+            <sunset_time_local>5:35 pm</sunset_time_local>
+            <sunset_time_utc>22:35</sunset_time_utc>
+        </day>
+    </location>
+</locations>

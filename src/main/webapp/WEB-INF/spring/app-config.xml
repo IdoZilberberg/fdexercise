@@ -6,7 +6,11 @@
 
     <context:annotation-config />
 
-    <bean id="externalFarmDataSource" class="com.ido.fdexercise.external.ExternalFarmDataSource"/>
+    <bean id="externalFarmDataSource" class="com.ido.fdexercise.external.ExternalFarmDataSource" init-method="init">
+        <property name="xmlMapper" ref="xmlMapper"/>
+    </bean>
+
+    <bean id="xmlMapper" class="com.fasterxml.jackson.dataformat.xml.XmlMapper"/>
 
     <bean id="dateFormatter" class="java.time.format.DateTimeFormatter" factory-method="ofPattern">
         <constructor-arg type="java.lang.String" value="yyyy-MM-dd"/>
