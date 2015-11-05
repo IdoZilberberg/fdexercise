@@ -34,7 +34,7 @@
     <div class="gryBx" style="padding-bottom: 26px">
       <div class="row">
         <div class="col-md-4"><img style="padding-left: 12px" src="resources/img/cloud.png"/></div>
-        <div class="col-md-8" style="padding-left: 12px"><span style="font-size: 12px" >Precipitation since seeding:</span><br><span style="font-size: 16px"><b>{{(farm.precip_in) || "N/A"}} inch</b></span></div>
+        <div class="col-md-8" style="padding-left: 12px"><span style="font-size: 12px" >Precipitation since seeding:</span><br><span style="font-size: 16px"><b>{{(farm.precip_in | number) || "N/A"}} inch</b></span></div>
       </div>
     </div>
   </div>
@@ -43,7 +43,7 @@
     <div class=" gryBx">
       <div class="row">
         <div class="col-md-4"><img style="padding-left: 12px" src="resources/img/thermo.png"/></div>
-        <div class="col-md-8" style="padding-left: 12px"><span style="font-size: 12px" >Lowest temp since seeding:</span><br><span style="font-size: 16px"><b>{{(farm.temp_min) || "N/A"}} &#8457;</b></span></div>
+        <div class="col-md-8" style="padding-left: 12px"><span style="font-size: 12px" >Lowest temp since seeding:</span><br><span style="font-size: 16px"><b>{{(farm.temp_min | number:1) || "N/A"}} &#8457;</b></span></div>
       </div>
     </div>
   </div>
@@ -52,7 +52,7 @@
     <div class="gryBx">
       <div class="row">
         <div class="col-md-4"><img style="padding-left: 12px" src="resources/img/thermo.png"/></div>
-        <div class="col-md-8" style="padding-left: 12px"><span style="font-size: 12px" >Highest temp since seeding:</span><br><span style="font-size: 16px"><b>{{(farm.temp_max) || "N/A"}} &#8457;</b></span></div>
+        <div class="col-md-8" style="padding-left: 12px"><span style="font-size: 12px" >Highest temp since seeding:</span><br><span style="font-size: 16px"><b>{{(farm.temp_max | number:1) || "N/A"}} &#8457;</b></span></div>
       </div>
     </div>
   </div>
