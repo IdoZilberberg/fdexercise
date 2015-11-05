@@ -2,6 +2,7 @@ package com.ido.fdexsercise.dao;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
@@ -22,6 +23,7 @@ public class FarmStatsDAOImplMemTest {
     db = new EmbeddedDatabaseBuilder().addDefaultScripts().build();
   }
 
+  @Ignore
   @Test
   public void testDataAccess() {
     JdbcTemplate template = new JdbcTemplate(db);

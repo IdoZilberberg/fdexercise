@@ -5,7 +5,6 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 /**
  * Created by Ido on 11/4/2015.
@@ -19,7 +18,9 @@ public class FarmDailyStatMapper implements RowMapper<FarmDailyStat> {
         rs.getDate("seedingDate").toLocalDate(),
         rs.getDouble("precipIn"),
         rs.getDouble("tempMin"),
-        rs.getDouble("tempMax"));
+        rs.getDouble("tempMax"),
+        rs.getDouble("lat"),
+        rs.getDouble("lng"));
 
     return result;
   }

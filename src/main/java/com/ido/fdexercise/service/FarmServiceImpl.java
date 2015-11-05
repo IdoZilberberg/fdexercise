@@ -8,14 +8,13 @@ import com.ido.fdexercise.model.FarmDailyStat;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
-import java.util.function.Function;
-import java.util.function.IntFunction;
-import java.util.function.Predicate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -47,7 +46,7 @@ public class FarmServiceImpl implements FarmService {
 
     final LocalDate yesterday = LocalDate.now().minusDays(1);
 
-    if(seedingDate.compareTo(yesterday) >0 ) {
+    if (seedingDate.compareTo(yesterday) > 0) {
       throw new IllegalArgumentException("Seeding date cannot be today or in the future!");
     }
 
@@ -56,7 +55,7 @@ public class FarmServiceImpl implements FarmService {
     List<FarmDailyStat> farmDailyStats = dao.getFarmDailyStats(zipcode, seedingDate, yesterday);
     final List<FarmDailyStat> fullData = new ArrayList<>();
     fullData.addAll(farmDailyStats);
-    if( totalDaysInRange > farmDailyStats.size() ) {
+    if (totalDaysInRange > farmDailyStats.size()) {
 
       final List<FarmDailyStat> missingData = getMissingDataBetweenDates(zipcode, seedingDate, yesterday, farmDailyStats);
       dao.insertFarmDailyStats(missingData);
@@ -71,12 +70,12 @@ public class FarmServiceImpl implements FarmService {
 
   private List<FarmDailyStat> getMissingDataBetweenDates(final Integer zipcode, final LocalDate startDate, final LocalDate endDate, final List<FarmDailyStat> farmDailyStats) {
 
-    final int totalDaysInRange = (int)(ChronoUnit.DAYS.between(startDate, endDate) + 1);
+    final int totalDaysInRange = (int) (ChronoUnit.DAYS.between(startDate, endDate) + 1);
     final Set<LocalDate> datesWithAvailableData = farmDailyStats
         .stream()
         .map(FarmDailyStat::getDate).collect(Collectors.toCollection(TreeSet::new));
     final Set<LocalDate> missingDates = IntStream
-        .range(0,totalDaysInRange)
+        .range(0, totalDaysInRange)
         .mapToObj(value -> startDate.plusDays(value))
         .filter(localDate -> !datesWithAvailableData.contains(localDate))
         .collect(Collectors.toCollection(TreeSet::new));

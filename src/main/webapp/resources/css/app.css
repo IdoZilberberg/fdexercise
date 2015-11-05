@@ -1,37 +1,20 @@
 /* app css stylesheet */
 
+
+.gryBx {background:#f8f8f8; border:1px solid #eee; padding:15px; margin-bottom:20px; position:relative;}
+.gryBx h4 {font-size:18px; color:#444; padding-bottom:15px;}
+.gryBx p {font-size:13px; color:#666;}
+.gryBx p a {color:#00b050;}
+.gryBx a.dis {font-size:13px; float:left; color:#00b050; margin-right:15px;}
+.gryBx .time, .code {font-size:13px; float:right;}
+
+.farm-stats-group    {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
 #wrapper {
     margin: 0 auto;
-    width: 650px;
+    width: 750px;
     margin-top: 50px;
-}
-
-.menu {
-    text-align: center;
-    list-style: none;
-    padding: 0 0 0.5em;
-    font-size: 40px;
-    font-weight: bolder;
-}
-
-.menu:before {
-    content: "[";
-}
-
-.menu:after {
-    content: "]";
-}
-
-.menu > li {
-    display: inline;
-}
-
-.menu > li:before {
-    content: "|";
-    padding-right: 0.3em;
-}
-
-.menu > li:nth-child(1):before {
-    content: "";
-    padding: 0;
 }

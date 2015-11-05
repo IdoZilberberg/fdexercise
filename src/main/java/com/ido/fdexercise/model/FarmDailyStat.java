@@ -4,29 +4,32 @@ import java.time.LocalDate;
 
 /**
  * Ido
- *
+ * <p>
  * Record to reflect a single line in the DB
  */
-public class FarmDailyStat implements Comparable<FarmDailyStat>{
+public class FarmDailyStat implements Comparable<FarmDailyStat> {
 
   private Integer zipcode;
   private LocalDate date;
   private Double precipIn, tempMin, tempMax;
+  private Double lat, lng;
 
   public FarmDailyStat() {
   }
 
-  public FarmDailyStat(Integer zipcode, LocalDate date, Double precipIn, Double tempMin, Double tempMax) {
+  public FarmDailyStat(Integer zipcode, LocalDate date, Double precipIn, Double tempMin, Double tempMax, Double lat, Double lng) {
     this.zipcode = zipcode;
     this.date = date;
     this.precipIn = precipIn;
     this.tempMin = tempMin;
     this.tempMax = tempMax;
+    this.lat = lat;
+    this.lng = lng;
   }
 
   public int compareTo(FarmDailyStat o) {
     Integer zipCompare = this.zipcode.compareTo(o.getZipcode());
-    if(zipCompare != 0 ) {
+    if (zipCompare != 0) {
       return zipCompare;
     }
 
@@ -72,5 +75,21 @@ public class FarmDailyStat implements Comparable<FarmDailyStat>{
 
   public void setTempMax(Double tempMax) {
     this.tempMax = tempMax;
+  }
+
+  public Double getLat() {
+    return lat;
+  }
+
+  public void setLat(Double lat) {
+    this.lat = lat;
+  }
+
+  public Double getLng() {
+    return lng;
+  }
+
+  public void setLng(Double lng) {
+    this.lng = lng;
   }
 }

@@ -16,12 +16,8 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URL;
-import java.net.URLConnection;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -45,12 +41,16 @@ public class ExternalFarmDataSource {
   XPathExpression xpathTempMax;
   XPathExpression xpathTempMin;
   XPathExpression xpathPrecipIn;
+  XPathExpression xpathLat;
+  XPathExpression xpathLng;
 
   public void init() throws XPathExpressionException, ParserConfigurationException {
     XPath xPath = XPathFactory.newInstance().newXPath();
     xpathTempMax = xPath.compile("/locations/location/day/temp_max");
     xpathTempMin = xPath.compile("/locations/location/day/temp_min");
     xpathPrecipIn = xPath.compile("/locations/location/day/precip_in");
+    xpathLat = xPath.compile("/locations/location/@request_lat");
+    xpathLng = xPath.compile("/locations/location/@request_lon");
     DocumentBuilderFactory builderFactory =
         DocumentBuilderFactory.newInstance();
     builder = builderFactory.newDocumentBuilder();
@@ -81,11 +81,14 @@ public class ExternalFarmDataSource {
     String precipIn = xpathPrecipIn.evaluate(xmlDocument);
     String tempMin = xpathTempMin.evaluate(xmlDocument);
     String tempMax = xpathTempMax.evaluate(xmlDocument);
+    String lat = xpathLat.evaluate(xmlDocument);
+    String lng = xpathLng.evaluate(xmlDocument);
 
-    log.info("Read from remote: zipcode={}, date={}, precipIn={}, tempMin={}, tempMax={}",
-        zipcode, dateFormatter.format(date), precipIn, tempMin, tempMax);
+    log.info("Read from remote: zipcode={}, date={}, precipIn={}, tempMin={}, tempMax={}, lat={}, lng={}",
+        zipcode, dateFormatter.format(date), precipIn, tempMin, tempMax, lat, lng);
 
-    return new FarmDailyStat(zipcode, date, Double.parseDouble(precipIn), Double.parseDouble(tempMin), Double.parseDouble(tempMax));
+    return new FarmDailyStat(zipcode, date, Double.parseDouble(precipIn), Double.parseDouble(tempMin), Double.parseDouble(tempMax),
+        Double.parseDouble(lat), Double.parseDouble(lng));
   }
 
   public void setXmlMapper(final XmlMapper xmlMapper) {

@@ -1,42 +1,66 @@
 <div class="alert alert-error" ng-show="error" xmlns="http://www.w3.org/1999/html">
   {{errorMessage}}
 </div>
-<form class="form-horizontal">
-  <div class="control-group">
-    <label class="control-label" for="zipcode">Farm Zip Code</label>
-    <label class="control-label" for="seedingDate">Seeding Date</label>
-  </div>
+<div class="jumbotron">
+  <h1 text-align="center">Hello, dear farmer!</h1>
+</div>
 
+<div>
+  <span  style="padding-left: 6px;" class="col-lg-6">Farm Zip Code</span>
+  <span  style="padding-left: 122px;" class="col-lg-6">Seeding Date</span>
+</div>
+
+<div>
+  <input type="text" id="zipcode" ng-model="farm.zipcode" placeholder="Zip Code" required min="5">
+  <input type="date" id="seedingDate" class="form-control" uib-datepicker-popup
+         ng-model="farm.seedingDate"
+         is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"
+         date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"/>
+
+</div>
+<p/>
+<div>
   <div class="controls">
-    <input type="text" id="zipcode" ng-model="farm.zipcode" placeholder="Zip Code" required min="5">
-    <div class="row">
-      <div class="col-md-6">
-        <p class="input-group">
-          <input type="date" id="seedingDate" class="form-control" uib-datepicker-popup ng-model="farm.seedingDate" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-        </p>
+    <button type="button" class="btn btn-primary" ng-disabled="!farm.zipcode || !farm.seedingDate" ng-hide="editMode"
+            ng-click="submit(farm)">Go
+    </button>
+    <button type="button" class="btn" ng-click="resetForm()">Reset</button>
+  </div>
+</div>
+</p>
+
+<div class="row">
+  <div style="width: 25%;float: left">
+    <div class="gryBx" style="padding-bottom: 26px">
+      <div class="row">
+        <div class="col-md-4"><img style="padding-left: 12px" src="resources/img/cloud.png"/></div>
+        <div class="col-md-8" style="padding-left: 12px"><span style="font-size: 12px" >Precipitation since seeding:</span><br><span style="font-size: 16px"><b>{{(farm.precip_in) || "N/A"}} inch</b></span></div>
       </div>
     </div>
-
   </div>
-  <div class="control-group">
-    <hr/>
-    <div class="controls">
-      <button type="button" class="btn btn-primary" ng-disabled="!farm.zipcode || !farm.seedingDate" ng-hide="editMode"
-              ng-click="submit(farm)">Go
-      </button>
-      <button type="button" class="btn" ng-click="resetForm()">Reset</button>
+
+  <div style="width: 25%; padding-left : 20px; float:left;">
+    <div class=" gryBx">
+      <div class="row">
+        <div class="col-md-4"><img style="padding-left: 12px" src="resources/img/thermo.png"/></div>
+        <div class="col-md-8" style="padding-left: 12px"><span style="font-size: 12px" >Lowest temp since seeding:</span><br><span style="font-size: 16px"><b>{{(farm.temp_min) || "N/A"}} &#8457;</b></span></div>
+      </div>
     </div>
   </div>
-  <div class="control-label">
-    <input type="text" id="precipIn" ng-readonly ng-model="farm.precip_in" placeholder="Precipitation (Inches)" />
-    <input type="text" id="tempMin" ng-readonly ng-model="farm.temp_min" placeholder="Minimum Temperature"/>
-    <input type="text" id="tempMax" ng-readonly ng-model="farm.temp_max" placeholder="Minimum Temperature"/>
+
+  <div style="width: 25%;padding-left : 20px; float:left;">
+    <div class="gryBx">
+      <div class="row">
+        <div class="col-md-4"><img style="padding-left: 12px" src="resources/img/thermo.png"/></div>
+        <div class="col-md-8" style="padding-left: 12px"><span style="font-size: 12px" >Highest temp since seeding:</span><br><span style="font-size: 16px"><b>{{(farm.temp_max) || "N/A"}} &#8457;</b></span></div>
+      </div>
+    </div>
   </div>
-  <div id="map"></div>
-</form>
+</div>
+</hr>
+</p>
+<div id="map"/>
+
 <hr/>
 
 

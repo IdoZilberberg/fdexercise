@@ -17,14 +17,18 @@ public class FarmStatsAggregator {
   public FarmStatsDTO aggregateStats(final List<FarmDailyStat> farmDailyStats) {
     log.info("Aggregating data for {} days.", farmDailyStats.size());
 
-    Double precipTotal=0.0, lowestTemp=Double.MAX_VALUE, highestTemp=Double.MIN_VALUE;
-
-    for( final FarmDailyStat stat : farmDailyStats )  {
-      precipTotal += stat.getPrecipIn();
-      lowestTemp = stat.getTempMin()<lowestTemp?stat.getTempMin():lowestTemp;
-      highestTemp = stat.getTempMax()>highestTemp?stat.getTempMax():highestTemp;
+    if(farmDailyStats==null || farmDailyStats.size()==0)  {
+      return null;
     }
-    return new FarmStatsDTO(precipTotal, lowestTemp, highestTemp);
+
+    Double precipTotal = 0.0, lowestTemp = Double.MAX_VALUE, highestTemp = Double.MIN_VALUE;
+
+    for (final FarmDailyStat stat : farmDailyStats) {
+      precipTotal += stat.getPrecipIn();
+      lowestTemp = stat.getTempMin() < lowestTemp ? stat.getTempMin() : lowestTemp;
+      highestTemp = stat.getTempMax() > highestTemp ? stat.getTempMax() : highestTemp;
+    }
+    return new FarmStatsDTO(precipTotal, lowestTemp, highestTemp, farmDailyStats.get(0).getLat(), farmDailyStats.get(0).getLng());
   }
 
 

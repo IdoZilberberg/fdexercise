@@ -3,7 +3,9 @@ CREATE TABLE STATS (
   seedingDate     DATE,
   precipIn        REAL,
   tempMin         REAL,
-  tempMax         REAL
+  tempMax         REAL,
+  lat             REAL,
+  lng             REAL
 );
 
 CREATE INDEX IX ON STATS(zipcode, seedingDate);

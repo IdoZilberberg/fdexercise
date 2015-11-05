@@ -38,7 +38,7 @@ public class FarmController {
     log.info("Called /stats with ZipCode={} and SeedingDate={}", zipcode, seedingDateStr);
     final LocalDate seedingDate = LocalDate.parse(seedingDateStr, dateFormatter);
     final FarmStatsDTO response = farmService.getFarmStats(zipcode, seedingDate);
-
+    log.info("Returning DTO: {}", response);
     return response;
   }
 
