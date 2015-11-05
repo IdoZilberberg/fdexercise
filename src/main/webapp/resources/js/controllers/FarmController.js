@@ -47,8 +47,6 @@ var FarmController = function ($scope, $http) {
   };
 
   $scope.resetMap = function(lat, lng)  {
-
-    debugger;
     var center = new google.maps.LatLng(lat, lng);
     map.panTo(center);
   }
